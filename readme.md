@@ -3,11 +3,24 @@
 A ROS nodelet for image rectification using OpenCV's gpu functions. This nodelet is useful to reduce CPU usage in rectifying large video streams.
 The OpenCV install linked by ROS must have the gpu apis (ie. compiled with gpu support or using OpenCV4Tegra)
 
+## Notes on OpenCV with CUDA
+To install OpenCV with CUDA on TX2 follow this guide:
+https://www.jetsonhacks.com/2018/05/28/build-opencv-3-4-with-cuda-on-nvidia-jetson-tx2/
+
+IMPORTANT: to use the OpenCV version in ROS, **all packages using OpenCV must refer to the same version**.
+To accomplish this, you can create a workspace with your own packages together with other opencv packages. One of the most used is **vision_opencv**, you can use this modified fork in which all packages link to OpenCV in /usr/local:
+
+https://github.com/daniel-dsouza/vision_opencv
+
+
+## image_proc_tegra installation
+
+
 Install:
 
 ```
 cd ~/catkin_ws/src
-git clone https://github.com/Jack000/image_proc_tegra.git
+git clone https://github.com/teosnare/image_proc_tegra.git
 catkin_make
 ```
 
