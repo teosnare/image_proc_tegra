@@ -4,7 +4,8 @@
 #include "opencv2/opencv.hpp"
 #include "opencv2/core.hpp"
 #include "opencv2/highgui.hpp"
-#include "opencv2/gpu/gpu.hpp"
+#include "opencv2/core/cuda.hpp"
+#include <opencv2/cudawarping.hpp>
 #include <cv_bridge/cv_bridge.h>
 #include <sensor_msgs/image_encodings.h>
 #include <image_geometry/pinhole_camera_model.h>
@@ -22,8 +23,8 @@ namespace image_proc_tegra
             ros::Subscriber sub_;
             ros::Subscriber sub_info_;
             ros::Publisher pub_;
-            cv::gpu::GpuMat mapx_;
-            cv::gpu::GpuMat mapy_;
+            cv::cuda::GpuMat mapx_;
+            cv::cuda::GpuMat mapy_;
             bool camera_set_;
     };
 

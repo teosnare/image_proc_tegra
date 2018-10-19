@@ -19,9 +19,9 @@ namespace image_proc_tegra {
       return;
     }
     cv_bridge::CvImageConstPtr image = cv_bridge::toCvShare(frame);
-    cv::gpu::GpuMat image_gpu(image->image);
-    cv::gpu::GpuMat image_gpu_rect(cv::Size(image->image.rows, image->image.cols), image->image.type());
-    cv::gpu::remap(image_gpu, image_gpu_rect, mapx_, mapy_, cv::INTER_LINEAR, cv::BORDER_CONSTANT);
+    cv::cuda::GpuMat image_gpu(image->image);
+    cv::cuda::GpuMat image_gpu_rect(cv::Size(image->image.rows, image->image.cols), image->image.type());
+    cv::cuda::remap(image_gpu, image_gpu_rect, mapx_, mapy_, cv::INTER_LINEAR, cv::BORDER_CONSTANT);
     cv::Mat image_rect = cv::Mat(image_gpu_rect);
 
     cv_bridge::CvImage out_msg;
@@ -37,8 +37,8 @@ namespace image_proc_tegra {
     cv::Mat m1;
     cv::Mat m2;
     cv::initUndistortRectifyMap(camera.intrinsicMatrix(), camera.distortionCoeffs(), cv::Mat(), camera.intrinsicMatrix(), camera.fullResolution(), CV_32FC1, m1, m2);
-    mapx_ = cv::gpu::GpuMat(m1);
-    mapy_ = cv::gpu::GpuMat(m2);
+    mapx_ = cv::cuda::GpuMat(m1);
+    mapy_ = cv::cuda::GpuMat(m2);
     sub_info_.shutdown();
     camera_set_ = true;
   }
